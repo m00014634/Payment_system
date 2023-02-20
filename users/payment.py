@@ -5,9 +5,9 @@ bp = Blueprint('payment',__name__)
 api = Api(bp)
 
 payment_model = api.parser()
-payment_model.add_argument('service_id',type = int)
-payment_model.add_argument('amount',type = float)
-
+payment_model.add_argument('service_id',type = int, required = True)
+payment_model.add_argument('amount',type = float, required = True)
+payment_model.add_argument('from_card',type = int , required = True)
 
 @api.route('/pay-service')
 class PayService(Resource):
