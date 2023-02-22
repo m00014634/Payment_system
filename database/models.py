@@ -9,13 +9,13 @@ db = SQLAlchemy()
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key = True,unique = True,autoincrement = True)
-    user_phone_number = db.Column(db.String(11),unique = True,nullable = False)
-    username = db.Column(db.String(75),nullable =False)
+    user_phone_number = db.Column(db.String,unique = True,nullable = False)
+    username = db.Column(db.String,nullable =False)
     reg_date = db.Column(db.DateTime,default = datetime.now())
 
     # Регистрация
-    def resister_user(self,phone_number,username):
-        new_user = User(phone_number=phone_number,username=username)
+    def resister_user(self,user_phone_number,username):
+        new_user = User(user_phone_number=user_phone_number,username=username)
         db.session.add(new_user)
         db.session.commit()
 
@@ -34,6 +34,7 @@ class Card(db.Model):
     card_number = db.Column(db.Integer,unique = True,nullable =False,primary_key = True)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id',ondelete='SET NULL'))
     amount = db.Column(db.Float)
+    card_name = db.Column(db.String,default='Просто карта')
     exp_date = db.Column(db.Date,nullable = False)
     added_date = db.Column(db.DateTime,default=datetime.now())
 
@@ -114,7 +115,7 @@ class Business(db.Model):
 class ServiceType(db.Model):
     __tablename__ = 'services'
     id = db.Column(db.Integer,autoincrement = True,primary_key = True)
-    service_category = db.Column(db.String,db.ForeignKey('businesses.service_name'))
+    service_category = db.Column(db.String)
     service_type_name = db.Column(db.String,unique = True)
     opened = db.Column(db.DateTime,default = datetime.now())
 

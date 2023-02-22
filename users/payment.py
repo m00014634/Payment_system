@@ -13,4 +13,4 @@ payment_model.add_argument('from_card',type = int , required = True)
 class PayService(Resource):
     @api.expect(payment_model)
     def post(self):
-        pass
+        return ''

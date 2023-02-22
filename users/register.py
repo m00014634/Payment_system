@@ -14,18 +14,17 @@ register_model.add_argument('phone_number',type = str,required = True)
 
 
 @api.route('/register')
-class Register(Resource):
+class RegisterUser(Resource):
     @api.expect(register_model) # User registration
     def post(self):
-        response = request.json
+        response = register_model.parse_args()
 
         username = response.get('name')
-        phone_number = response.get('phone_number')
+        user_phone_number = response.get('phone_number')
 
-        try:
-            User().resister_user(username=username,phone_number=phone_number)
-            return {'status':1,'message':'Пользователь успешно зарегистрирован'}
-        except:
-            return {'status':0,'message':'Такой пользователь уже существует'}
+
+        user_id = User().resister_user(username=username,user_phone_number = user_phone_number)
+        return {'status':1,'user_id':user_id}
+
 
 

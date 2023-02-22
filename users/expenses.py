@@ -14,4 +14,4 @@ expenses_model.add_argument('service_type',type = str)
 class Expenses(Resource):
     @api.expect(expenses_model)
     def post(self):
-        pass
+        return ''

@@ -15,4 +15,4 @@ transfer_model.add_argument('amount',type = float,required = True)
 class TransferMoney(Resource):
     @api.expect(transfer_model)
     def post(self):
-        pass
+        return ''

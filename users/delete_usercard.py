@@ -15,8 +15,8 @@ delete_usercard_model.add_argument('user_id',type = int)
 class Expenses(Resource):
     @api.expect(delete_usercard_model)
     def delete(self,card_id):
-        current_usercard = Card.query.get_or_404(card_id)
 
+        current_usercard = Card.query.get_or_404(card_id)
         if current_usercard:
             Card.delete_card(current_usercard,card_id)
             return {'status':1,'message':'Карта успешно удалена'}
