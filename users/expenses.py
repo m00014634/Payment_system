@@ -15,7 +15,7 @@ class Expenses(Resource):
     def get(self):
         card_number = expenses_model.parse_args()
 
-        result = TransfersP2P().monitor_pays(card_number.get('card_number'))
+        result = TransfersP2P().monitoring_pays(card_number.get('card_number'))
 
         if result:
             return {'status':1,'message':result}
