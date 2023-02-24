@@ -1,10 +1,7 @@
-from flask import Blueprint,request
+from flask import Blueprint
 from flask_restx import Api,Resource
 from database.models import User
-
-bp = Blueprint('register',__name__)
-
-api = Api(bp)
+from users import api
 
 
 register_model = api.parser()
