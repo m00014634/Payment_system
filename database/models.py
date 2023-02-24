@@ -175,3 +175,12 @@ class TransfersP2P(db.Model):
             return 'Успешно'
 
         return 'Недостаточно средств'
+
+    def monitoring_pays(self,card_number):
+        card = Card().get_card_object(card_number)
+        card_payments = TransfersP2P.query.filter_by(user_from_card = card.card_number).all()
+
+        if card_payments:
+            result = [{'pay_id':i.id,'pay_type':i.user_to_card,'amount':i.amount,'date':str(i.p2p_date)} for i in card_payments]
+            return result
+        return False
